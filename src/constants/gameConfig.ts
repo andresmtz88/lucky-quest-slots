@@ -1,4 +1,4 @@
-export const SAVE_KEY = "luckyQuestSlotsSaveV1";
+export const STORAGE_KEY = "luckyQuestSlotsSaveV1";
 
 export const STARTING_COINS = 10000;
 

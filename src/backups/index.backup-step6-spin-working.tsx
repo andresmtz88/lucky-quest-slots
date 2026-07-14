@@ -1,3 +1,4 @@
+﻿// @ts-nocheck
 import { useState } from "react";
 import {
   SafeAreaView,
@@ -12,7 +13,7 @@ type Screen = "welcome" | "lobby" | "neonDragon";
 const STARTING_COINS = 10000;
 const DEFAULT_BET = 100;
 
-const NEON_DRAGON_SYMBOLS = ["🐉", "🪙", "💎", "🔥", "🥚", "🏮", "7️⃣", "🟩"];
+const NEON_DRAGON_SYMBOLS = ["ðŸ‰", "ðŸª™", "ðŸ’Ž", "ðŸ”¥", "ðŸ¥š", "ðŸ®", "7ï¸âƒ£", "ðŸŸ©"];
 
 function getRandomSymbol() {
   const randomIndex = Math.floor(Math.random() * NEON_DRAGON_SYMBOLS.length);
@@ -92,7 +93,7 @@ function WelcomeScreen({ onEnter }: { onEnter: () => void }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.logo}>🎰</Text>
+        <Text style={styles.logo}>ðŸŽ°</Text>
 
         <Text style={styles.title}>Lucky Quest Slots</Text>
 
@@ -128,8 +129,8 @@ function LobbyScreen({
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.lobbyHeader}>
-        <Text style={styles.smallLogo}>🎰 Lucky Quest Slots</Text>
-        <Text style={styles.coinBalance}>🪙 {coins.toLocaleString()} Coins</Text>
+        <Text style={styles.smallLogo}>ðŸŽ° Lucky Quest Slots</Text>
+        <Text style={styles.coinBalance}>ðŸª™ {coins.toLocaleString()} Coins</Text>
       </View>
 
       <View style={styles.lobbyCard}>
@@ -139,7 +140,7 @@ function LobbyScreen({
         </Text>
 
         <SlotCard
-          icon="🐉"
+          icon="ðŸ‰"
           title="Neon Dragon Fortune"
           description="Vegas neon, glowing gems, and dragon treasure."
           status="Playable"
@@ -147,14 +148,14 @@ function LobbyScreen({
         />
 
         <SlotCard
-          icon="🏴‍☠️"
+          icon="ðŸ´â€â˜ ï¸"
           title="Pirate Moon Jackpot"
           description="Treasure maps, moonlit reels, and pirate rewards."
           status="Coming Soon"
         />
 
         <SlotCard
-          icon="🐱"
+          icon="ðŸ±"
           title="Catsino Royale"
           description="Luxury casino cats, golden paws, and royal rewards."
           status="Coming Soon"
@@ -255,13 +256,13 @@ function NeonDragonScreen({
     <SafeAreaView style={styles.slotContainer}>
       <View style={styles.slotHeader}>
         <TouchableOpacity onPress={onBack}>
-          <Text style={styles.headerLink}>← Lobby</Text>
+          <Text style={styles.headerLink}>â† Lobby</Text>
         </TouchableOpacity>
 
-        <Text style={styles.headerCoins}>🪙 {coins.toLocaleString()}</Text>
+        <Text style={styles.headerCoins}>ðŸª™ {coins.toLocaleString()}</Text>
       </View>
 
-      <Text style={styles.machineTitle}>🐉 Neon Dragon Fortune</Text>
+      <Text style={styles.machineTitle}>ðŸ‰ Neon Dragon Fortune</Text>
 
       <Text style={styles.machineSubtitle}>
         Vegas neon meets dragon treasure.

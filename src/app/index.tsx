@@ -1,62 +1,62 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Haptics from "expo-haptics";
 import {
-  type Dispatch,
-  type SetStateAction,
-  useEffect,
-  useRef,
-  useState,
+    type Dispatch,
+    type SetStateAction,
+    useEffect,
+    useRef,
+    useState,
 } from "react";
 import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
+    SafeAreaView,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
 } from "react-native";
 
 import {
-  AD_COOLDOWN_MS,
-  BET_OPTIONS,
-  DAILY_BONUS,
-  DAILY_COOLDOWN_MS,
-  DEFAULT_BET,
-  FREE_SPIN_TOKEN_REWARD,
-  HOURLY_BONUS,
-  HOURLY_COOLDOWN_MS,
-  JACKPOT_MAX_PROGRESS,
-  JACKPOT_PROGRESS_PER_SPIN,
-  JACKPOT_REWARD,
-  LEVEL_UP_COIN_REWARD,
-  LOSS_SHIELD_REFUND_RATE,
-  LOSS_SHIELD_SPIN_DURATION,
-  LOSS_SHIELD_TOKEN_REWARD,
-  NEON_DRAGON_OBJECTIVE_REWARD,
-  OBJECTIVE_CLAIM_XP_REWARD,
-  PIRATE_MOON_MAX_PROGRESS,
-  PIRATE_MOON_PROGRESS_PER_SPIN,
-  PIRATE_MOON_REWARD,
-  REWARD_CLAIM_OBJECTIVE_REWARD,
-  REWARDED_AD_BONUS,
-  SAVE_KEY,
-  SPIN_OBJECTIVE_REWARD,
-  SPIN_XP_REWARD,
-  STARTING_COINS,
-  STARTING_FREE_SPIN_TOKENS,
-  STARTING_JACKPOT_PROGRESS,
-  STARTING_LOSS_SHIELD_TOKENS,
-  STARTING_PIRATE_MOON_PROGRESS,
-  WIN_OBJECTIVE_REWARD,
-  WIN_XP_REWARD
+    AD_COOLDOWN_MS,
+    BET_OPTIONS,
+    DAILY_BONUS,
+    DAILY_COOLDOWN_MS,
+    DEFAULT_BET,
+    FREE_SPIN_TOKEN_REWARD,
+    HOURLY_BONUS,
+    HOURLY_COOLDOWN_MS,
+    JACKPOT_MAX_PROGRESS,
+    JACKPOT_PROGRESS_PER_SPIN,
+    JACKPOT_REWARD,
+    LEVEL_UP_COIN_REWARD,
+    LOSS_SHIELD_REFUND_RATE,
+    LOSS_SHIELD_SPIN_DURATION,
+    LOSS_SHIELD_TOKEN_REWARD,
+    NEON_DRAGON_OBJECTIVE_REWARD,
+    OBJECTIVE_CLAIM_XP_REWARD,
+    PIRATE_MOON_MAX_PROGRESS,
+    PIRATE_MOON_PROGRESS_PER_SPIN,
+    PIRATE_MOON_REWARD,
+    REWARD_CLAIM_OBJECTIVE_REWARD,
+    REWARDED_AD_BONUS,
+    SPIN_OBJECTIVE_REWARD,
+    SPIN_XP_REWARD,
+    STARTING_COINS,
+    STARTING_FREE_SPIN_TOKENS,
+    STARTING_JACKPOT_PROGRESS,
+    STARTING_LOSS_SHIELD_TOKENS,
+    STARTING_PIRATE_MOON_PROGRESS,
+    STORAGE_KEY,
+    WIN_OBJECTIVE_REWARD,
+    WIN_XP_REWARD
 } from "../constants/gameConfig";
 
 import {
-  calculateMiddleRowWin,
-  createRandomPirateMoonReels,
-  createRandomReels,
-  formatTimeRemaining,
-  getXpNeededForNextLevel,
+    calculateMiddleRowWin,
+    createRandomPirateMoonReels,
+    createRandomReels,
+    formatTimeRemaining,
+    getXpNeededForNextLevel,
 } from "../utils/gameUtils";
 
 type Screen =
@@ -135,7 +135,7 @@ export default function HomeScreen() {
   useEffect(() => {
     async function loadGameSave() {
       try {
-        const savedData = await AsyncStorage.getItem(SAVE_KEY);
+        const savedData = await AsyncStorage.getItem(STORAGE_KEY);
 
         if (savedData !== null) {
           const parsedSave: GameSaveData = JSON.parse(savedData);
@@ -209,7 +209,7 @@ export default function HomeScreen() {
       };
 
       try {
-        await AsyncStorage.setItem(SAVE_KEY, JSON.stringify(saveData));
+        await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(saveData));
       } catch (error) {
         console.log("Failed to save game data:", error);
       }
@@ -278,7 +278,7 @@ export default function HomeScreen() {
 
   async function resetProgress() {
     try {
-      await AsyncStorage.removeItem(SAVE_KEY);
+      await AsyncStorage.removeItem(STORAGE_KEY);
     } catch (error) {
       console.log("Failed to reset save data:", error);
     }

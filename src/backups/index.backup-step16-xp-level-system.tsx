@@ -1,39 +1,40 @@
+﻿// @ts-nocheck
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
 } from "react-native";
 
 import {
-  AD_COOLDOWN_MS,
-  BET_OPTIONS,
-  DAILY_BONUS,
-  DAILY_COOLDOWN_MS,
-  DEFAULT_BET,
-  HOURLY_BONUS,
-  HOURLY_COOLDOWN_MS,
-  LEVEL_UP_COIN_REWARD,
-  NEON_DRAGON_OBJECTIVE_REWARD,
-  OBJECTIVE_CLAIM_XP_REWARD,
-  REWARD_CLAIM_OBJECTIVE_REWARD,
-  REWARDED_AD_BONUS,
-  SAVE_KEY,
-  SPIN_OBJECTIVE_REWARD,
-  SPIN_XP_REWARD,
-  STARTING_COINS,
-  WIN_OBJECTIVE_REWARD,
-  WIN_XP_REWARD,
+    AD_COOLDOWN_MS,
+    BET_OPTIONS,
+    DAILY_BONUS,
+    DAILY_COOLDOWN_MS,
+    DEFAULT_BET,
+    HOURLY_BONUS,
+    HOURLY_COOLDOWN_MS,
+    LEVEL_UP_COIN_REWARD,
+    NEON_DRAGON_OBJECTIVE_REWARD,
+    OBJECTIVE_CLAIM_XP_REWARD,
+    REWARD_CLAIM_OBJECTIVE_REWARD,
+    REWARDED_AD_BONUS,
+    SPIN_OBJECTIVE_REWARD,
+    SPIN_XP_REWARD,
+    STARTING_COINS,
+    STORAGE_KEY,
+    WIN_OBJECTIVE_REWARD,
+    WIN_XP_REWARD,
 } from "../constants/gameConfig";
 
 import {
-  calculateMiddleRowWin,
-  createRandomReels,
-  formatTimeRemaining,
-  getXpNeededForNextLevel,
+    calculateMiddleRowWin,
+    createRandomReels,
+    formatTimeRemaining,
+    getXpNeededForNextLevel,
 } from "../utils/gameUtils";
 
 type Screen = "welcome" | "lobby" | "neonDragon" | "rewards" | "objectives";
@@ -75,7 +76,7 @@ export default function HomeScreen() {
   useEffect(() => {
     async function loadGameSave() {
       try {
-        const savedData = await AsyncStorage.getItem(SAVE_KEY);
+        const savedData = await AsyncStorage.getItem(STORAGE_KEY);
 
         if (savedData !== null) {
           const parsedSave: GameSaveData = JSON.parse(savedData);
@@ -123,7 +124,7 @@ export default function HomeScreen() {
       };
 
       try {
-        await AsyncStorage.setItem(SAVE_KEY, JSON.stringify(saveData));
+        await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(saveData));
       } catch (error) {
         console.log("Failed to save game data:", error);
       }
@@ -149,7 +150,7 @@ export default function HomeScreen() {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.card}>
-          <Text style={styles.logo}>🎰</Text>
+          <Text style={styles.logo}>ðŸŽ°</Text>
           <Text style={styles.title}>Lucky Quest Slots</Text>
           <Text style={styles.subtitle}>Loading your quest...</Text>
         </View>
@@ -253,7 +254,7 @@ function WelcomeScreen({ onEnter }: { onEnter: () => void }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.logo}>🎰</Text>
+        <Text style={styles.logo}>ðŸŽ°</Text>
 
         <Text style={styles.title}>Lucky Quest Slots</Text>
 
@@ -297,10 +298,10 @@ function LobbyScreen({
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.lobbyHeader}>
-        <Text style={styles.smallLogo}>🎰 Lucky Quest Slots</Text>
-        <Text style={styles.coinBalance}>🪙 {coins.toLocaleString()} Coins</Text>
+        <Text style={styles.smallLogo}>ðŸŽ° Lucky Quest Slots</Text>
+        <Text style={styles.coinBalance}>ðŸª™ {coins.toLocaleString()} Coins</Text>
         <Text style={styles.levelText}>
-          Level {playerLevel} · XP {playerXp}/{getXpNeededForNextLevel(playerLevel)}
+          Level {playerLevel} Â· XP {playerXp}/{getXpNeededForNextLevel(playerLevel)}
         </Text>
       </View>
 
@@ -311,7 +312,7 @@ function LobbyScreen({
         </Text>
 
         <SlotCard
-          icon="🐉"
+          icon="ðŸ‰"
           title="Neon Dragon Fortune"
           description="Vegas neon, glowing gems, and dragon treasure."
           status="Playable"
@@ -319,14 +320,14 @@ function LobbyScreen({
         />
 
         <SlotCard
-          icon="🏴‍☠️"
+          icon="ðŸ´â€â˜ ï¸"
           title="Pirate Moon Jackpot"
           description="Treasure maps, moonlit reels, and pirate rewards."
           status="Coming Soon"
         />
 
         <SlotCard
-          icon="🐱"
+          icon="ðŸ±"
           title="Catsino Royale"
           description="Luxury casino cats, golden paws, and royal rewards."
           status="Coming Soon"
@@ -474,21 +475,21 @@ function RewardsScreen({
     <SafeAreaView style={styles.rewardsContainer}>
       <View style={styles.slotHeader}>
         <TouchableOpacity onPress={onBack}>
-          <Text style={styles.headerLink}>← Lobby</Text>
+          <Text style={styles.headerLink}>â† Lobby</Text>
         </TouchableOpacity>
 
-        <Text style={styles.headerCoins}>🪙 {coins.toLocaleString()}</Text>
+        <Text style={styles.headerCoins}>ðŸª™ {coins.toLocaleString()}</Text>
       </View>
 
       <View style={styles.rewardsCard}>
-        <Text style={styles.rewardsTitle}>🎁 Rewards</Text>
+        <Text style={styles.rewardsTitle}>ðŸŽ Rewards</Text>
 
         <Text style={styles.rewardsSubtitle}>
           Earn free virtual coins through bonuses and optional rewarded ads.
         </Text>
 
         <RewardButton
-          icon="🌅"
+          icon="ðŸŒ…"
           title="Daily Bonus"
           description={`Cooldown: ${formatTimeRemaining(dailyRemaining)}`}
           amount={DAILY_BONUS}
@@ -505,7 +506,7 @@ function RewardsScreen({
         />
 
         <RewardButton
-          icon="⏰"
+          icon="â°"
           title="Hourly Bonus"
           description={`Cooldown: ${formatTimeRemaining(hourlyRemaining)}`}
           amount={HOURLY_BONUS}
@@ -522,7 +523,7 @@ function RewardsScreen({
         />
 
         <RewardButton
-          icon="📺"
+          icon="ðŸ“º"
           title="Watch Ad Reward"
           description={`Testing cooldown: ${formatTimeRemaining(adRemaining)}`}
           amount={REWARDED_AD_BONUS}
@@ -622,14 +623,14 @@ function ObjectivesScreen({
     <SafeAreaView style={styles.objectivesContainer}>
       <View style={styles.slotHeader}>
         <TouchableOpacity onPress={onBack}>
-          <Text style={styles.headerLink}>← Lobby</Text>
+          <Text style={styles.headerLink}>â† Lobby</Text>
         </TouchableOpacity>
 
-        <Text style={styles.headerCoins}>🪙 {coins.toLocaleString()}</Text>
+        <Text style={styles.headerCoins}>ðŸª™ {coins.toLocaleString()}</Text>
       </View>
 
       <View style={styles.objectivesCard}>
-        <Text style={styles.objectivesTitle}>🎯 Objectives</Text>
+        <Text style={styles.objectivesTitle}>ðŸŽ¯ Objectives</Text>
 
         <Text style={styles.objectivesSubtitle}>
           Complete tasks to earn free virtual coins.
@@ -843,20 +844,20 @@ function NeonDragonScreen({
     <SafeAreaView style={styles.slotContainer}>
       <View style={styles.slotHeader}>
         <TouchableOpacity onPress={onBack}>
-          <Text style={styles.headerLink}>← Lobby</Text>
+          <Text style={styles.headerLink}>â† Lobby</Text>
         </TouchableOpacity>
 
-        <Text style={styles.headerCoins}>🪙 {coins.toLocaleString()}</Text>
+        <Text style={styles.headerCoins}>ðŸª™ {coins.toLocaleString()}</Text>
       </View>
 
-      <Text style={styles.machineTitle}>🐉 Neon Dragon Fortune</Text>
+      <Text style={styles.machineTitle}>ðŸ‰ Neon Dragon Fortune</Text>
 
       <Text style={styles.machineSubtitle}>
         Vegas neon meets dragon treasure.
       </Text>
 
       <Text style={styles.levelText}>
-        Level {playerLevel} · XP {playerXp}/{getXpNeededForNextLevel(playerLevel)}
+        Level {playerLevel} Â· XP {playerXp}/{getXpNeededForNextLevel(playerLevel)}
       </Text>
 
       <View style={styles.paylineInfoBox}>
@@ -893,7 +894,7 @@ function NeonDragonScreen({
             onPress={decreaseBet}
             disabled={isSpinning}
           >
-            <Text style={styles.betButtonText}>−</Text>
+            <Text style={styles.betButtonText}>âˆ’</Text>
           </TouchableOpacity>
 
           <Text style={styles.betChoice}>{betAmount.toLocaleString()}</Text>
@@ -921,17 +922,17 @@ function NeonDragonScreen({
 
         <View style={styles.payoutRow}>
           <Text style={styles.payoutText}>3 left-to-right matches</Text>
-          <Text style={styles.payoutValue}>Bet × 5</Text>
+          <Text style={styles.payoutValue}>Bet Ã— 5</Text>
         </View>
 
         <View style={styles.payoutRow}>
           <Text style={styles.payoutText}>4 left-to-right matches</Text>
-          <Text style={styles.payoutValue}>Bet × 15</Text>
+          <Text style={styles.payoutValue}>Bet Ã— 15</Text>
         </View>
 
         <View style={styles.payoutRow}>
           <Text style={styles.payoutText}>5 left-to-right matches</Text>
-          <Text style={styles.payoutValue}>Bet × 50</Text>
+          <Text style={styles.payoutValue}>Bet Ã— 50</Text>
         </View>
       </View>
 

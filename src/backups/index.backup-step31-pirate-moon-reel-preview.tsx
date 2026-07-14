@@ -1,58 +1,59 @@
+﻿// @ts-nocheck
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Haptics from "expo-haptics";
 import {
-  type Dispatch,
-  type SetStateAction,
-  useEffect,
-  useRef,
-  useState,
+    type Dispatch,
+    type SetStateAction,
+    useEffect,
+    useRef,
+    useState,
 } from "react";
 import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
+    SafeAreaView,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
 } from "react-native";
 
 import {
-  AD_COOLDOWN_MS,
-  BET_OPTIONS,
-  DAILY_BONUS,
-  DAILY_COOLDOWN_MS,
-  DEFAULT_BET,
-  FREE_SPIN_TOKEN_REWARD,
-  HOURLY_BONUS,
-  HOURLY_COOLDOWN_MS,
-  JACKPOT_MAX_PROGRESS,
-  JACKPOT_PROGRESS_PER_SPIN,
-  JACKPOT_REWARD,
-  LEVEL_UP_COIN_REWARD,
-  LOSS_SHIELD_REFUND_RATE,
-  LOSS_SHIELD_SPIN_DURATION,
-  LOSS_SHIELD_TOKEN_REWARD,
-  NEON_DRAGON_OBJECTIVE_REWARD,
-  OBJECTIVE_CLAIM_XP_REWARD,
-  PIRATE_MOON_SYMBOLS,
-  REWARD_CLAIM_OBJECTIVE_REWARD,
-  REWARDED_AD_BONUS,
-  SAVE_KEY,
-  SPIN_OBJECTIVE_REWARD,
-  SPIN_XP_REWARD,
-  STARTING_COINS,
-  STARTING_FREE_SPIN_TOKENS,
-  STARTING_JACKPOT_PROGRESS,
-  STARTING_LOSS_SHIELD_TOKENS,
-  WIN_OBJECTIVE_REWARD,
-  WIN_XP_REWARD
+    AD_COOLDOWN_MS,
+    BET_OPTIONS,
+    DAILY_BONUS,
+    DAILY_COOLDOWN_MS,
+    DEFAULT_BET,
+    FREE_SPIN_TOKEN_REWARD,
+    HOURLY_BONUS,
+    HOURLY_COOLDOWN_MS,
+    JACKPOT_MAX_PROGRESS,
+    JACKPOT_PROGRESS_PER_SPIN,
+    JACKPOT_REWARD,
+    LEVEL_UP_COIN_REWARD,
+    LOSS_SHIELD_REFUND_RATE,
+    LOSS_SHIELD_SPIN_DURATION,
+    LOSS_SHIELD_TOKEN_REWARD,
+    NEON_DRAGON_OBJECTIVE_REWARD,
+    OBJECTIVE_CLAIM_XP_REWARD,
+    PIRATE_MOON_SYMBOLS,
+    REWARD_CLAIM_OBJECTIVE_REWARD,
+    REWARDED_AD_BONUS,
+    SPIN_OBJECTIVE_REWARD,
+    SPIN_XP_REWARD,
+    STARTING_COINS,
+    STARTING_FREE_SPIN_TOKENS,
+    STARTING_JACKPOT_PROGRESS,
+    STARTING_LOSS_SHIELD_TOKENS,
+    STORAGE_KEY,
+    WIN_OBJECTIVE_REWARD,
+    WIN_XP_REWARD
 } from "../constants/gameConfig";
 
 import {
-  calculateMiddleRowWin,
-  createRandomReels,
-  formatTimeRemaining,
-  getXpNeededForNextLevel,
+    calculateMiddleRowWin,
+    createRandomReels,
+    formatTimeRemaining,
+    getXpNeededForNextLevel,
 } from "../utils/gameUtils";
 
 type Screen =
@@ -125,7 +126,7 @@ export default function HomeScreen() {
   useEffect(() => {
     async function loadGameSave() {
       try {
-        const savedData = await AsyncStorage.getItem(SAVE_KEY);
+        const savedData = await AsyncStorage.getItem(STORAGE_KEY);
 
         if (savedData !== null) {
           const parsedSave: GameSaveData = JSON.parse(savedData);
@@ -193,7 +194,7 @@ export default function HomeScreen() {
       };
 
       try {
-        await AsyncStorage.setItem(SAVE_KEY, JSON.stringify(saveData));
+        await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(saveData));
       } catch (error) {
         console.log("Failed to save game data:", error);
       }
@@ -227,7 +228,7 @@ export default function HomeScreen() {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.card}>
-          <Text style={styles.logo}>🎰</Text>
+          <Text style={styles.logo}>ðŸŽ°</Text>
           <Text style={styles.title}>Lucky Quest Slots</Text>
           <Text style={styles.subtitle}>Loading your quest...</Text>
         </View>
@@ -252,7 +253,7 @@ export default function HomeScreen() {
     if (levelUpCoinReward > 0) {
       setCoins((currentCoins) => currentCoins + levelUpCoinReward);
 
-      return ` · Level Up +${levelUpCoinReward.toLocaleString()}`;
+      return ` Â· Level Up +${levelUpCoinReward.toLocaleString()}`;
     }
 
     return "";
@@ -260,7 +261,7 @@ export default function HomeScreen() {
 
   async function resetProgress() {
     try {
-      await AsyncStorage.removeItem(SAVE_KEY);
+      await AsyncStorage.removeItem(STORAGE_KEY);
     } catch (error) {
       console.log("Failed to reset save data:", error);
     }
@@ -483,7 +484,7 @@ function WelcomeScreen({ onEnter }: { onEnter: () => void }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.logo}>🎰</Text>
+        <Text style={styles.logo}>ðŸŽ°</Text>
 
         <Text style={styles.title}>Lucky Quest Slots</Text>
 
@@ -531,10 +532,10 @@ function LobbyScreen({
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.lobbyHeader}>
-        <Text style={styles.smallLogo}>🎰 Lucky Quest Slots</Text>
-        <Text style={styles.coinBalance}>🪙 {coins.toLocaleString()} Coins</Text>
+        <Text style={styles.smallLogo}>ðŸŽ° Lucky Quest Slots</Text>
+        <Text style={styles.coinBalance}>ðŸª™ {coins.toLocaleString()} Coins</Text>
         <Text style={styles.levelText}>
-          Level {playerLevel} · XP {playerXp}/{getXpNeededForNextLevel(playerLevel)}
+          Level {playerLevel} Â· XP {playerXp}/{getXpNeededForNextLevel(playerLevel)}
         </Text>
       </View>
 
@@ -545,7 +546,7 @@ function LobbyScreen({
         </Text>
 
         <SlotCard
-          icon="🐉"
+          icon="ðŸ‰"
           title="Neon Dragon Fortune"
           description="Vegas neon, glowing gems, and dragon treasure."
           status="Playable"
@@ -553,7 +554,7 @@ function LobbyScreen({
         />
 
         <SlotCard
-          icon="🏴‍☠️"
+          icon="ðŸ´â€â˜ ï¸"
           title="Pirate Moon Jackpot"
           description="Treasure maps, moonlit reels, and pirate rewards."
           status="Preview"
@@ -561,7 +562,7 @@ function LobbyScreen({
         />
 
         <SlotCard
-          icon="🐱"
+          icon="ðŸ±"
           title="Catsino Royale"
           description="Luxury casino cats, golden paws, and royal rewards."
           status="Coming Soon"
@@ -655,13 +656,13 @@ function PirateMoonScreen({
       >
         <View style={styles.slotHeader}>
           <TouchableOpacity onPress={onBack}>
-            <Text style={styles.headerLink}>← Lobby</Text>
+            <Text style={styles.headerLink}>â† Lobby</Text>
           </TouchableOpacity>
 
-          <Text style={styles.headerCoins}>🪙 {coins.toLocaleString()}</Text>
+          <Text style={styles.headerCoins}>ðŸª™ {coins.toLocaleString()}</Text>
         </View>
 
-        <Text style={styles.machineTitle}>🏴‍☠️ Pirate Moon Jackpot</Text>
+        <Text style={styles.machineTitle}>ðŸ´â€â˜ ï¸ Pirate Moon Jackpot</Text>
 
         <Text style={styles.machineSubtitle}>
           Treasure maps, moonlit reels, and pirate rewards.
@@ -669,16 +670,16 @@ function PirateMoonScreen({
 
         <View style={styles.statusCard}>
           <Text style={styles.statusMainText}>
-            Lv {playerLevel} · XP {playerXp}/{getXpNeededForNextLevel(playerLevel)}
+            Lv {playerLevel} Â· XP {playerXp}/{getXpNeededForNextLevel(playerLevel)}
           </Text>
 
           <View style={styles.statusRow}>
-            <Text style={styles.statusJackpotText}>🌙 Preview Slot</Text>
+            <Text style={styles.statusJackpotText}>ðŸŒ™ Preview Slot</Text>
           </View>
         </View>
 
         <View style={styles.piratePreviewBox}>
-          <Text style={styles.piratePreviewIcon}>🏴‍☠️🌙💰</Text>
+          <Text style={styles.piratePreviewIcon}>ðŸ´â€â˜ ï¸ðŸŒ™ðŸ’°</Text>
 
           <Text style={styles.piratePreviewTitle}>
             Pirate Moon Jackpot is being prepared.
@@ -721,17 +722,17 @@ function PirateMoonScreen({
 
           <View style={styles.payoutRow}>
             <Text style={styles.payoutText}>3 left-to-right matches</Text>
-            <Text style={styles.payoutValue}>Bet × 5</Text>
+            <Text style={styles.payoutValue}>Bet Ã— 5</Text>
           </View>
 
           <View style={styles.payoutRow}>
             <Text style={styles.payoutText}>4 left-to-right matches</Text>
-            <Text style={styles.payoutValue}>Bet × 15</Text>
+            <Text style={styles.payoutValue}>Bet Ã— 15</Text>
           </View>
 
           <View style={styles.payoutRow}>
             <Text style={styles.payoutText}>5 left-to-right matches</Text>
-            <Text style={styles.payoutValue}>Bet × 50</Text>
+            <Text style={styles.payoutValue}>Bet Ã— 50</Text>
           </View>
         </View>
 
@@ -855,21 +856,21 @@ function RewardsScreen({
     <SafeAreaView style={styles.rewardsContainer}>
       <View style={styles.slotHeader}>
         <TouchableOpacity onPress={onBack}>
-          <Text style={styles.headerLink}>← Lobby</Text>
+          <Text style={styles.headerLink}>â† Lobby</Text>
         </TouchableOpacity>
 
-        <Text style={styles.headerCoins}>🪙 {coins.toLocaleString()}</Text>
+        <Text style={styles.headerCoins}>ðŸª™ {coins.toLocaleString()}</Text>
       </View>
 
       <View style={styles.rewardsCard}>
-        <Text style={styles.rewardsTitle}>🎁 Rewards</Text>
+        <Text style={styles.rewardsTitle}>ðŸŽ Rewards</Text>
 
         <Text style={styles.rewardsSubtitle}>
           Earn free virtual coins through bonuses and optional rewarded ads.
         </Text>
 
         <RewardButton
-          icon="🌅"
+          icon="ðŸŒ…"
           title="Daily Bonus"
           description={`Cooldown: ${formatTimeRemaining(dailyRemaining)}`}
           amount={DAILY_BONUS}
@@ -886,7 +887,7 @@ function RewardsScreen({
         />
 
         <RewardButton
-          icon="⏰"
+          icon="â°"
           title="Hourly Bonus"
           description={`Cooldown: ${formatTimeRemaining(hourlyRemaining)}`}
           amount={HOURLY_BONUS}
@@ -903,7 +904,7 @@ function RewardsScreen({
         />
 
         <RewardButton
-          icon="📺"
+          icon="ðŸ“º"
           title="Watch Ad Reward"
           description={`Testing cooldown: ${formatTimeRemaining(adRemaining)}`}
           amount={REWARDED_AD_BONUS}
@@ -920,7 +921,7 @@ function RewardsScreen({
         />
 
         <RewardButton
-          icon="🎟️"
+          icon="ðŸŽŸï¸"
           title="Free Spin Tokens"
           description={`Testing reward. Current tokens: ${freeSpinTokens}`}
           amount={FREE_SPIN_TOKEN_REWARD}
@@ -928,7 +929,7 @@ function RewardsScreen({
         />
 
         <RewardButton
-          icon="🛡️"
+          icon="ðŸ›¡ï¸"
           title="Loss Shield Tokens"
           description={`Testing reward. Current tokens: ${lossShieldTokens}`}
           amount={LOSS_SHIELD_TOKEN_REWARD}
@@ -1025,7 +1026,7 @@ function ObjectivesScreen({
     const xpMessage = onAwardXp(OBJECTIVE_CLAIM_XP_REWARD);
 
     setObjectiveMessage(
-      `Quest claimed! +${rewardAmount.toLocaleString()} coins · +${OBJECTIVE_CLAIM_XP_REWARD} XP${xpMessage}`
+      `Quest claimed! +${rewardAmount.toLocaleString()} coins Â· +${OBJECTIVE_CLAIM_XP_REWARD} XP${xpMessage}`
     );
   }
 
@@ -1038,14 +1039,14 @@ function ObjectivesScreen({
     >
       <View style={styles.slotHeader}>
         <TouchableOpacity onPress={onBack}>
-          <Text style={styles.headerLink}>← Lobby</Text>
+          <Text style={styles.headerLink}>â† Lobby</Text>
         </TouchableOpacity>
 
-        <Text style={styles.headerCoins}>🪙 {coins.toLocaleString()}</Text>
+        <Text style={styles.headerCoins}>ðŸª™ {coins.toLocaleString()}</Text>
       </View>
 
       <View style={styles.objectivesCard}>
-        <Text style={styles.objectivesTitle}>🎯 Daily Quests</Text>
+        <Text style={styles.objectivesTitle}>ðŸŽ¯ Daily Quests</Text>
 
         <Text style={styles.objectivesSubtitle}>
           Complete quests to earn free virtual coins and XP.
@@ -1053,7 +1054,7 @@ function ObjectivesScreen({
 
         <View style={styles.questPlayerStatusBox}>
          <Text style={styles.questPlayerStatusText}>
-           Lv {playerLevel} · XP {playerXp}/{getXpNeededForNextLevel(playerLevel)}
+           Lv {playerLevel} Â· XP {playerXp}/{getXpNeededForNextLevel(playerLevel)}
          </Text>
 
          <Text style={styles.questPlayerStatusSubtext}>
@@ -1177,7 +1178,7 @@ function ObjectiveCard({
         </Text>
 
         <Text style={styles.objectiveRewardText}>
-          Reward +{reward.toLocaleString()} · +{OBJECTIVE_CLAIM_XP_REWARD} XP
+          Reward +{reward.toLocaleString()} Â· +{OBJECTIVE_CLAIM_XP_REWARD} XP
         </Text>
       </View>
 
@@ -1202,7 +1203,7 @@ function ObjectiveCard({
           {isClaimed
             ? "Claimed"
             : isComplete
-              ? `Claim +${reward.toLocaleString()} · +${OBJECTIVE_CLAIM_XP_REWARD} XP`
+              ? `Claim +${reward.toLocaleString()} Â· +${OBJECTIVE_CLAIM_XP_REWARD} XP`
               : "Keep Playing"}
         </Text>
       </TouchableOpacity>
@@ -1249,10 +1250,10 @@ function SettingsScreen({
     <SafeAreaView style={styles.settingsContainer}>
       <View style={styles.slotHeader}>
         <TouchableOpacity onPress={onBack}>
-          <Text style={styles.headerLink}>← Lobby</Text>
+          <Text style={styles.headerLink}>â† Lobby</Text>
         </TouchableOpacity>
 
-        <Text style={styles.headerCoins}>⚙️ Settings</Text>
+        <Text style={styles.headerCoins}>âš™ï¸ Settings</Text>
       </View>
 
       <View style={styles.settingsCard}>
@@ -1284,7 +1285,7 @@ function SettingsScreen({
           <Text style={styles.settingsSectionTitle}>Saved Progress</Text>
           <Text style={styles.settingsText}>Coins: {coins.toLocaleString()}</Text>
           <Text style={styles.settingsText}>
-            Level: {playerLevel} · XP: {playerXp}
+            Level: {playerLevel} Â· XP: {playerXp}
           </Text>
           <Text style={styles.settingsText}>
             Dragon Jackpot Meter: {jackpotProgress}%
@@ -1591,7 +1592,7 @@ function NeonDragonScreen({
         : Math.min(nextJackpotProgressRaw, JACKPOT_MAX_PROGRESS);
 
       const jackpotMessage = jackpotTriggered
-        ? ` · Jackpot +${JACKPOT_REWARD.toLocaleString()}`
+        ? ` Â· Jackpot +${JACKPOT_REWARD.toLocaleString()}`
         : "";
 
       if (jackpotTriggered) {
@@ -1621,30 +1622,30 @@ function NeonDragonScreen({
         earnedXp += WIN_XP_REWARD;
 
         addWinHistoryEntry(
-          `${useFreeSpin ? "Free Spin · " : ""}Win +${winAmount.toLocaleString()}`
+          `${useFreeSpin ? "Free Spin Â· " : ""}Win +${winAmount.toLocaleString()}`
         );
 
         const xpMessage = onAwardXp(earnedXp);
 
         setResultMessage(
-              `${useFreeSpin ? "Free Spin · " : ""}Win +${winAmount.toLocaleString()} · +${earnedXp} XP${xpMessage}${jackpotMessage}`
+              `${useFreeSpin ? "Free Spin Â· " : ""}Win +${winAmount.toLocaleString()} Â· +${earnedXp} XP${xpMessage}${jackpotMessage}`
         );
       } else {
         const xpMessage = onAwardXp(earnedXp);
 
         addWinHistoryEntry(
           shieldRefund > 0
-            ? `${useFreeSpin ? "Free Spin · " : ""}No win · Shield +${shieldRefund.toLocaleString()}`
-            : `${useFreeSpin ? "Free Spin · " : ""}No win`
+            ? `${useFreeSpin ? "Free Spin Â· " : ""}No win Â· Shield +${shieldRefund.toLocaleString()}`
+            : `${useFreeSpin ? "Free Spin Â· " : ""}No win`
         );
 
         if (shieldRefund > 0) {
           setResultMessage(
-            `${useFreeSpin ? "Free Spin · " : ""}No win · Shield +${shieldRefund.toLocaleString()} · +${earnedXp} XP${xpMessage}${jackpotMessage}`
+            `${useFreeSpin ? "Free Spin Â· " : ""}No win Â· Shield +${shieldRefund.toLocaleString()} Â· +${earnedXp} XP${xpMessage}${jackpotMessage}`
           );
         } else {
           setResultMessage(
-            `${useFreeSpin ? "Free Spin · " : ""}No win · +${earnedXp} XP${xpMessage}${jackpotMessage}`
+            `${useFreeSpin ? "Free Spin Â· " : ""}No win Â· +${earnedXp} XP${xpMessage}${jackpotMessage}`
           );
         }
       }
@@ -1662,13 +1663,13 @@ function NeonDragonScreen({
       >
       <View style={styles.slotHeader}>
         <TouchableOpacity onPress={onBack}>
-          <Text style={styles.headerLink}>← Lobby</Text>
+          <Text style={styles.headerLink}>â† Lobby</Text>
         </TouchableOpacity>
 
-        <Text style={styles.headerCoins}>🪙 {coins.toLocaleString()}</Text>
+        <Text style={styles.headerCoins}>ðŸª™ {coins.toLocaleString()}</Text>
       </View>
 
-      <Text style={styles.machineTitle}>🐉 Neon Dragon Fortune</Text>
+      <Text style={styles.machineTitle}>ðŸ‰ Neon Dragon Fortune</Text>
 
       <Text style={styles.machineSubtitle}>
         Vegas neon meets dragon treasure.
@@ -1676,21 +1677,21 @@ function NeonDragonScreen({
 
       <View style={styles.statusCard}>
         <Text style={styles.statusMainText}>
-          Lv {playerLevel} · XP {playerXp}/{getXpNeededForNextLevel(playerLevel)}
+          Lv {playerLevel} Â· XP {playerXp}/{getXpNeededForNextLevel(playerLevel)}
         </Text>
 
         <View style={styles.statusRow}>
-          <Text style={styles.statusTokenText}>🎟️ {freeSpinTokens}</Text>
+          <Text style={styles.statusTokenText}>ðŸŽŸï¸ {freeSpinTokens}</Text>
           <Text style={styles.statusShieldText}>
-            🛡️ {lossShieldTokens}/{lossShieldSpinsRemaining}
+            ðŸ›¡ï¸ {lossShieldTokens}/{lossShieldSpinsRemaining}
           </Text>
-          <Text style={styles.statusJackpotText}>🐉 {jackpotProgress}%</Text>
+          <Text style={styles.statusJackpotText}>ðŸ‰ {jackpotProgress}%</Text>
         </View>
       </View>
 
       <View style={styles.jackpotBox}>
         <View style={styles.jackpotHeaderRow}>
-          <Text style={styles.jackpotTitle}>🐉 Dragon Jackpot Meter</Text>
+          <Text style={styles.jackpotTitle}>ðŸ‰ Dragon Jackpot Meter</Text>
           <Text style={styles.jackpotPercent}>{jackpotProgress}%</Text>
         </View>
 
@@ -1743,7 +1744,7 @@ function NeonDragonScreen({
               onPress={decreaseBet}
              disabled={isSpinning}
             >
-              <Text style={styles.compactBetButtonText}>−</Text>
+              <Text style={styles.compactBetButtonText}>âˆ’</Text>
             </TouchableOpacity>
 
             <Text style={styles.compactBetAmount}>
@@ -1787,7 +1788,7 @@ function NeonDragonScreen({
             onPress={() => handleSpin(true)}
             disabled={isSpinning || freeSpinTokens <= 0}
           >
-            <Text style={styles.compactFreeSpinButtonText}>Free Spin 🎟️</Text>
+            <Text style={styles.compactFreeSpinButtonText}>Free Spin ðŸŽŸï¸</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -1801,7 +1802,7 @@ function NeonDragonScreen({
               isSpinning || lossShieldTokens <= 0 || lossShieldSpinsRemaining > 0
             }
           >
-            <Text style={styles.compactLossShieldButtonText}>Shield 🛡️</Text>
+            <Text style={styles.compactLossShieldButtonText}>Shield ðŸ›¡ï¸</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -1814,7 +1815,7 @@ function NeonDragonScreen({
           {showWinHistory ? "Hide Recent Spins" : "Show Recent Spins"}
         </Text>
         <Text style={styles.collapsibleHeaderIcon}>
-          {showWinHistory ? "▲" : "▼"}
+          {showWinHistory ? "â–²" : "â–¼"}
         </Text>
       </TouchableOpacity>
 
@@ -1842,7 +1843,7 @@ function NeonDragonScreen({
           {showPayouts ? "Hide Payouts" : "Show Payouts"}
         </Text>
         <Text style={styles.collapsibleHeaderIcon}>
-          {showPayouts ? "▲" : "▼"}
+          {showPayouts ? "â–²" : "â–¼"}
         </Text>
       </TouchableOpacity>
 
@@ -1852,17 +1853,17 @@ function NeonDragonScreen({
 
           <View style={styles.payoutRow}>
             <Text style={styles.payoutText}>3 left-to-right matches</Text>
-            <Text style={styles.payoutValue}>Bet × 5</Text>
+            <Text style={styles.payoutValue}>Bet Ã— 5</Text>
           </View>
 
           <View style={styles.payoutRow}>
             <Text style={styles.payoutText}>4 left-to-right matches</Text>
-            <Text style={styles.payoutValue}>Bet × 15</Text>
+            <Text style={styles.payoutValue}>Bet Ã— 15</Text>
           </View>
 
           <View style={styles.payoutRow}>
             <Text style={styles.payoutText}>5 left-to-right matches</Text>
-            <Text style={styles.payoutValue}>Bet × 50</Text>
+            <Text style={styles.payoutValue}>Bet Ã— 50</Text>
           </View>
         </View>
       )}

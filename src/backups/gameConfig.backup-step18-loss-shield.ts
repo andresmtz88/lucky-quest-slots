@@ -1,4 +1,5 @@
-export const SAVE_KEY = "luckyQuestSlotsSaveV1";
+﻿// @ts-nocheck
+export const STORAGE_KEY = "luckyQuestSlotsSaveV1";
 
 export const STARTING_COINS = 10000;
 
@@ -32,4 +33,4 @@ export const LOSS_SHIELD_TOKEN_REWARD = 2;
 export const LOSS_SHIELD_SPIN_DURATION = 10;
 export const LOSS_SHIELD_REFUND_RATE = 0.2;
 
-export const NEON_DRAGON_SYMBOLS = ["🐉", "🪙", "💎", "🔥", "🥚", "🏮", "7️⃣", "🟩"];
+export const NEON_DRAGON_SYMBOLS = ["ðŸ‰", "ðŸª™", "ðŸ’Ž", "ðŸ”¥", "ðŸ¥š", "ðŸ®", "7ï¸âƒ£", "ðŸŸ©"];

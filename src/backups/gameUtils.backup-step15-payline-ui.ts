@@ -1,3 +1,4 @@
+﻿// @ts-nocheck
 import { NEON_DRAGON_SYMBOLS } from "../constants/gameConfig";
 
 export function getRandomSymbol() {

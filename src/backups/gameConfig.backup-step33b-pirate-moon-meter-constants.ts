@@ -1,4 +1,5 @@
-export const SAVE_KEY = "luckyQuestSlotsSaveV1";
+﻿// @ts-nocheck
+export const STORAGE_KEY = "luckyQuestSlotsSaveV1";
 
 export const STARTING_COINS = 10000;
 
@@ -42,5 +43,5 @@ export const PIRATE_MOON_MAX_PROGRESS = 100;
 export const PIRATE_MOON_PROGRESS_PER_SPIN = 5;
 export const PIRATE_MOON_REWARD = 10000;
 
-export const NEON_DRAGON_SYMBOLS = ["🐉", "🪙", "💎", "🔥", "🥚", "🏮", "7️⃣", "🟩"];
-export const PIRATE_MOON_SYMBOLS = ["🏴‍☠️", "🌙", "💰", "🗺️", "⚓", "🦜", "💎", "☠️"];
+export const NEON_DRAGON_SYMBOLS = ["ðŸ‰", "ðŸª™", "ðŸ’Ž", "ðŸ”¥", "ðŸ¥š", "ðŸ®", "7ï¸âƒ£", "ðŸŸ©"];
+export const PIRATE_MOON_SYMBOLS = ["ðŸ´â€â˜ ï¸", "ðŸŒ™", "ðŸ’°", "ðŸ—ºï¸", "âš“", "ðŸ¦œ", "ðŸ’Ž", "â˜ ï¸"];
