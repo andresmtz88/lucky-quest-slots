@@ -1,56 +1,158 @@
-# Welcome to your Expo app 👋
+# Lucky Quest Slots
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A cross-platform mobile slot game built with React Native, Expo, and TypeScript.
 
-## Get started
+Lucky Quest Slots is a free-to-play social casino project focused on progression, objectives, rewards, persistent local saves, and polished mobile interaction. It does not use real-money gambling or cash-out mechanics.
 
-1. Install dependencies
+## Project Status
 
-   ```bash
-   npm install
-   ```
+Active development. The current build includes two playable slot themes and the core progression, reward, save, and settings systems.
 
-2. Start the app
+## Current Slot Themes
 
-   ```bash
-   npx expo start
-   ```
+- **Neon Dragon Fortune** — neon fantasy slot experience with jackpot progression
+- **Pirate Moon Jackpot** — pirate-themed slot experience with its own reel set, progress meter, and reward loop
+- **Catsino Royale** — planned luxury cat-themed slot experience
 
-In the output, you'll find options to open the app in a
+## Core Features
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Adjustable bet controls
+- Slot reel generation and win evaluation
+- Coin balance and payout handling
+- Player XP and level progression
+- Level-up coin rewards
+- Daily and hourly rewards
+- Rewarded-ad bonus concept
+- Free-spin tokens
+- Loss-shield tokens
+- Jackpot and themed progress meters
+- Objectives and claimable rewards
+- Recent-spin and win history
+- Sound, music, and vibration settings
+- Haptic feedback
+- Persistent local save data with AsyncStorage
+- Scrollable mobile layouts designed for different screen sizes
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Technical Highlights
 
-## Get a fresh project
+### Persistent State
 
-When you're ready, run:
+The application stores progression and settings locally with `@react-native-async-storage/async-storage`. Saved data includes coins, player level and XP, settings, jackpot progress, themed progress, win history, token balances, reward cooldowns, and objective claims.
 
-```bash
-npm run reset-project
+### Progression Systems
+
+Gameplay actions feed connected progression systems, including XP, levels, objectives, token rewards, jackpots, and themed meters. This creates a broader gameplay loop beyond individual spins.
+
+### Iterative Development
+
+The project was built through small, testable milestones. Features were added one system at a time, with working backups and functional testing used to isolate regressions, resolve synchronization issues, and preserve stable builds.
+
+## Technology Stack
+
+- React Native
+- Expo
+- TypeScript / JavaScript
+- Expo Router
+- AsyncStorage
+- Expo Haptics
+- Git and GitHub
+
+## Project Structure
+
+```text
+src/
+├── app/          # Main application screens and game flow
+├── constants/    # Game configuration and progression values
+├── utils/        # Reel generation, payout, timing, and XP helpers
+└── backups/      # Development checkpoints retained during early builds
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+The `src/backups/` directory contains development snapshots created while the project was being built. Git history will replace this backup approach as the repository is cleaned and prepared for a more production-like structure.
 
-### Other setup steps
+## Getting Started
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+### Prerequisites
 
-## Learn more
+- Node.js
+- npm
+- Expo Go, an Android emulator, or an iOS simulator
 
-To learn more about developing your project with Expo, look at the following resources:
+### Installation
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+git clone https://github.com/andresmtz88/lucky-quest-slots.git
+cd lucky-quest-slots
+npm install
+```
 
-## Join the community
+### Run the App
 
-Join our community of developers creating universal apps.
+```bash
+npx expo start
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Additional commands:
+
+```bash
+npm run android
+npm run ios
+npm run web
+npm run lint
+```
+
+## Product Principles
+
+- Entertainment only — no real-money gambling or cash-out mechanics
+- Rewarded ads rather than forced interruptions
+- Progression and objectives that reward continued play
+- Local-first persistence for the MVP
+- Clear settings and user control
+- Incremental development with frequent testing
+
+## Current Limitations
+
+- No production deployment or app-store release
+- No cloud account system or cross-device sync
+- Rewarded-ad flow is a product concept rather than a production ad-network integration
+- Audio assets and final visual polish are still in development
+- Catsino Royale is planned but not yet implemented
+
+## Planned Improvements
+
+- Complete Catsino Royale
+- Replace placeholder audio with production-ready sound and music
+- Add automated tests for payout and progression logic
+- Refactor the main screen into smaller reusable components
+- Remove development backup files after validating Git history
+- Add screenshots and gameplay demonstrations
+- Prepare Android and iOS release builds
+
+## Security and Privacy
+
+- No user accounts are required in the current MVP
+- Save data remains on the local device
+- No API keys or private credentials are required to run the current project
+- The repository was reviewed with Gitleaks; detected `SAVE_KEY` findings were local-storage identifier false positives, not credentials
+
+## What This Project Demonstrates
+
+- Cross-platform mobile development
+- State and persistence design
+- Product-oriented feature planning
+- Reusable gameplay systems
+- Debugging and regression isolation
+- Iterative delivery
+- Mobile UX refinement
+
+## Author
+
+**Andres Martinez, M.D.**
+
+Physician-trained healthcare operations professional building AI-enabled software, mobile applications, and workflow systems.
+
+- GitHub: [andresmtz88](https://github.com/andresmtz88)
+- LinkedIn: [andresmtz88](https://www.linkedin.com/in/andresmtz88/)
+
+## License
+
+This project is maintained as a personal portfolio and learning project. Review the repository license before reuse or redistribution.
